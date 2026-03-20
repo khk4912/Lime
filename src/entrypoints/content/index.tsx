@@ -4,7 +4,7 @@ const contentScript = defineContentScript({
   matches: ['https://ci.me/*'],
   allFrames: true,
   main (ctx) {
-    RenderButtons(ctx)
+    RenderButtons()
   }
 })
 

@@ -1,22 +1,28 @@
-import ReactDOM from 'react-dom/client'
-import { createIntegratedUi, type ContentScriptContext } from '#imports'
-import { waitForElement } from '@/hooks/element'
-import { VJSButtonRenderer } from '@/components/Buttons'
+import { createRoot, type Root } from 'react-dom/client'
+import { PlayerButtonRenderer } from '@/components/Buttons'
+export function RenderButtons () {
+  let div = document.createElement('div')
+  div.id = 'lime-buttons'
 
-export function RenderButtons (ctx: ContentScriptContext) {
-  waitForElement('#vjs_video_3 > div.vjs-control-bar')
+  document.body.appendChild(div)
 
-    .then(() => {
-      const UI = createIntegratedUi(ctx, {
-        position: 'inline',
-        anchor: '#vjs_video_3',
-        onMount: (container) => {
-          const root = ReactDOM.createRoot(container)
-          root.render(<VJSButtonRenderer />)
-        },
-      })
+  let root = inject(<PlayerButtonRenderer />, div)
 
-      UI.autoMount()
-    })
-    .catch(console.error)
+  window.navigation?.addEventListener('navigate', () => {
+    root.unmount()
+    div.remove()
+
+    div = document.createElement('div')
+    div.id = 'lime-buttons'
+
+    document.body.appendChild(div)
+    root = inject(<PlayerButtonRenderer />, div)
+  })
+}
+
+function inject (node: React.ReactNode, target: HTMLElement): Root {
+  const root = createRoot(target)
+  root.render(node)
+
+  return root
 }

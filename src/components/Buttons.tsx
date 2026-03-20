@@ -27,7 +27,7 @@ function CustomVJSButton ({ className }: { className?: string }) {
   )
 }
 
-function VJSButtonPortalContainer ({ children }: { children: React.ReactNode }) {
+function PlayerButtonPortalContainer ({ children }: { children: React.ReactNode }) {
   const portalTarget = usePortal({
     id: 'lime-button-portal',
     targetSelector: '.vjs-control.vjs-button.vjs-video-edit-open',
@@ -36,10 +36,17 @@ function VJSButtonPortalContainer ({ children }: { children: React.ReactNode }) 
   return portalTarget ? ReactDOM.createPortal(children, portalTarget) : null
 }
 
-export function VJSButtonRenderer () {
+export function PlayerButtonRenderer () {
+  useEffect(() => {
+    console.log('PlayerButtonRenderer mounted')
+    return () => {
+      console.log('PlayerButtonRenderer unmounted')
+    }
+  }, [])
+
   return (
-    <VJSButtonPortalContainer>
+    <PlayerButtonPortalContainer>
       <CustomVJSButton className='' />
-    </VJSButtonPortalContainer>
+    </PlayerButtonPortalContainer>
   )
 }
