@@ -48,6 +48,9 @@ importers:
       globals:
         specifier: ^17.4.0
         version: 17.4.0
+      navigation-api-types:
+        specifier: ^0.6.1
+        version: 0.6.1
       neostandard:
         specifier: ^0.13.0
         version: 0.13.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
@@ -2319,6 +2322,9 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+
+  navigation-api-types@0.6.1:
+    resolution: {integrity: sha512-e1BbABfPRKLkBbZfAVuRFR2CLFWOtSt8e0ryJivjvLdw8yxD7ASPgyfl+klcGYvrPcP4zhOtZ4KpmQcEo1FgQw==}
 
   neostandard@0.13.0:
     resolution: {integrity: sha512-R3iglFr+Dla/8qFBqsMxBvcYBOgP6rAGw7uRHKMpM3bUP0wLDRzUstxtEI9RfEwn7xszE/UUnh8H090Ru4Z52A==}
@@ -5398,6 +5404,8 @@ snapshots:
       picocolors: 1.1.1
 
   natural-compare@1.4.0: {}
+
+  navigation-api-types@0.6.1: {}
 
   neostandard@0.13.0(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3):
     dependencies:

@@ -1,8 +1,8 @@
 {
-  "name": "wxt-react-starter",
-  "description": "manifest.json description",
+  "name": "lime-ext",
+  "description": "씨미(Cime)에 다양한 기능을 추가합니다.",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "wxt",
@@ -12,7 +12,8 @@
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
-    "postinstall": "wxt prepare"
+    "postinstall": "wxt prepare",
+    "lint": "tsc --noEmit && eslint"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
@@ -30,6 +31,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "navigation-api-types": "^0.6.1",
     "neostandard": "^0.13.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.1",
