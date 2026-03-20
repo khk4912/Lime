@@ -27,8 +27,7 @@ export default defineConfig({
       }
     ],
     content_security_policy: {
-      extension_pages: "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';",
-      sandbox: "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval'; child-src 'self';"
+      extension_pages: "script-src 'self'; object-src 'self';",
     },
     browser_specific_settings: {
       gecko: {
