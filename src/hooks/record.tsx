@@ -1,35 +1,81 @@
 import { storage } from '#imports'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getStreamInfo } from '@/utils/steram_info'
 
 type RecordStatus = 'recording' | 'stopped'
 
 export function useRecord () {
   const [recordStatus, setRecordStatus] = useState<RecordStatus>('stopped')
+
   const recorderRef = useRef<MediaRecorder | null>(null)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+
+  const stoppingRef = useRef(false)
+  const mountedRef = useRef(true)
+
+  // eslint effect ilnter 수정
+  const stopWithFinalizeRef = useRef<() => Promise<void>>(async () => {})
+
+  stopWithFinalizeRef.current = async () => {
+    const recorder = recorderRef.current
+    if (recorder === null || stoppingRef.current) {
+      return
+    }
+
+    stoppingRef.current = true
+
+    try {
+      const info = await _stopRecord(recorder)
+      recorderRef.current = null
+      videoRef.current = null
+
+      if (mountedRef.current) {
+        setRecordStatus('stopped')
+      }
+
+      if (info !== null) {
+        download(info)
+      }
+    } catch (error) {
+      console.error('Error occurred while stopping recording:', error)
+    } finally {
+      stoppingRef.current = false
+    }
+  }
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (recordStatus !== 'recording' || video === null) {
+      return
+    }
+
+    const handleEnded = () => {
+      void stopWithFinalizeRef.current()
+    }
+
+    video.addEventListener('ended', handleEnded)
+    return () => {
+      video.removeEventListener('ended', handleEnded)
+    }
+  }, [recordStatus])
+
+  // Unmounted
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false
+      void stopWithFinalizeRef.current()
+    }
+  }, [])
 
   const toggle = () => {
     if (recordStatus === 'recording') {
-      const recorder = recorderRef.current
-      if (recorder === null) {
-        setRecordStatus('stopped')
-        return
-      }
-
-      _stopRecord(recorder)
-        .then((info) => {
-          setRecordStatus('stopped')
-          recorderRef.current = null
-          if (info !== null) {
-            download(info)
-          }
-        })
-        .catch((error) => {
-          console.error('Error occurred while stopping recording:', error)
-        })
+      void stopWithFinalizeRef.current()
     } else {
-      const recorder = _startRecord(recorderRef)
+      const video = getDefaultVideoElement()
+      const recorder = _startRecord(recorderRef, video)
+
       if (recorder !== null) {
+        videoRef.current = video
         setRecordStatus('recording')
       }
     }
@@ -42,8 +88,10 @@ export function useRecord () {
   }
 }
 
-function _startRecord (recorderRef: React.RefObject<MediaRecorder | null>): MediaRecorder | null {
-  const video = getDefaultVideoElement()
+function _startRecord (
+  recorderRef: React.RefObject<MediaRecorder | null>,
+  video: HTMLVideoElement | null
+): MediaRecorder | null {
   const streamInfo = getStreamInfo()
 
   if (video === null) {
@@ -147,10 +195,12 @@ function getDefaultVideoElement (): HTMLVideoElement | null {
 }
 
 function download (recordInfo: RecordInfo): void {
+  const duration = (recordInfo.stopDateTime - recordInfo.startDateTime) / 1000 - 0.1
+
   const a = document.createElement('a')
   a.href =
     recordInfo.resultBlobURL
-  a.download = `${recordInfo.streamInfo.streamerName}_${recordInfo.streamInfo.title}_${new Date(recordInfo.startDateTime).toISOString()}.${recordInfo.isMP4 ? 'mp4' : 'webm'}`
+  a.download = `${recordInfo.streamInfo.streamerName}_${duration.toFixed(2)}s.${recordInfo.isMP4 ? 'mp4' : 'webm'}`
   a.click()
 
   URL.revokeObjectURL(recordInfo.resultBlobURL)
