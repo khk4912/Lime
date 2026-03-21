@@ -2,6 +2,8 @@ import ReactDOM from 'react-dom'
 
 import { PIPButton } from './PIPButton'
 import { ScreenshotButton } from './ScreenshotButton'
+import { RecordButton } from './RecordButton'
+
 import { useOptions } from '@/providers/useOptions'
 
 const PlayerPortalStyle: React.CSSProperties = {
@@ -38,8 +40,9 @@ export function PlayerButtonRenderer () {
 
   return (
     <PlayerButtonPortalContainer>
-      {options.pip && <PIPButton />}
+      {options.rec && <RecordButton />}
       {options.screenshot && <ScreenshotButton />}
+      {options.pip && <PIPButton />}
     </PlayerButtonPortalContainer>
   )
 }

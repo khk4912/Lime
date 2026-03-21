@@ -64,26 +64,32 @@ function App () {
 
   return (
     <>
-      <main className='flex-row h-60 w-full
+      <main className='flex-row h-80 w-full
                      items-center px-8 text-zinc-50'
       >
         <Header />
-        <div className='grid gap-1 mt-5 border border-white/10
-                        px-5 py-4 rounded-2xl'
+        <div className='grid mt-5 border border-white/10
+                        px-5 py-4 rounded-2xl gap-6'
         >
           <Option
-            optionKey='pip'
-            label='PIP 사용'
-            description='브라우저 PIP 버튼을 추가합니다.'
+            optionKey='rec'
+            label='녹화'
+            description='녹화 버튼을 추가합니다.'
           />
-          <div className='mt-4' />
           <Option
             optionKey='screenshot'
-            label='스크린샷 사용'
+            label='스크린샷'
             description='스크린샷 버튼을 추가합니다.'
           />
+          <Option
+            optionKey='pip'
+            label='PIP'
+            description='브라우저 PIP 버튼을 추가합니다.'
+          />
         </div>
+
         {isLoading && <p className='mt-4 text-xs text-zinc-400'>옵션을 불러오는 중...</p>}
+
       </main>
       <footer className='mx-3 px-5 py-5 mt-3'>
         <p>
