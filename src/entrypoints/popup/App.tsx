@@ -15,10 +15,10 @@ function Option ({ optionKey, label, description }: ToggleProps) {
   const isChecked = options[optionKey]
 
   return (
-    <div className='flex items-center gap-4'>
+    <div className='flex items-center gap-4 overflow-hidden'>
       <div className='min-w-0'>
-        <p className='text-sm font-medium text-white'>{label}</p>
-        {description && <p className='text-xs text-zinc-200 break-keep'>{description}</p>}
+        <p className='text-sm font-semibold text-white'>{label}</p>
+        {description && <p className='text-11 text-zinc-200 break-keep whitespace-pre-line'>{description}</p>}
       </div>
       <label className='flex-1 inline-flex items-center cursor-pointer justify-end'>
         <input
@@ -44,7 +44,7 @@ function Header () {
   return (
     <div className='flex w-full items-center gap-4 rounded-2xl
                     border border-white/10 bg-white/5
-                    px-5 py-4 mt-5 mb-10'
+                    px-5 py-4 my-5'
     >
       <img
         src={browser.runtime.getURL('/icons/128.png')}
@@ -64,26 +64,28 @@ function App () {
 
   return (
     <>
-      <main className='flex-row h-50 w-full
+      <main className='flex-row h-60 w-full
                      items-center px-8 text-zinc-50'
       >
         <Header />
-        <Option
-          optionKey='pip'
-          label='PIP 사용'
-          description='방송 화면에 브라우저 PIP 버튼을 추가합니다.'
-        />
-        <div className='mt-4' />
-        <Option
-          optionKey='screenshot'
-          label='스크린샷 사용'
-          description='방송 화면에 스크린샷 버튼을 추가합니다.'
-        />
-
+        <div className='grid gap-1 mt-5 border border-white/10
+                        px-5 py-4 rounded-2xl'
+        >
+          <Option
+            optionKey='pip'
+            label='PIP 사용'
+            description='브라우저 PIP 버튼을 추가합니다.'
+          />
+          <div className='mt-4' />
+          <Option
+            optionKey='screenshot'
+            label='스크린샷 사용'
+            description='스크린샷 버튼을 추가합니다.'
+          />
+        </div>
         {isLoading && <p className='mt-4 text-xs text-zinc-400'>옵션을 불러오는 중...</p>}
       </main>
-      <footer className='mx-3 px-5 py-5 mt-10'>
-        <hr className='border-zinc-700 mb-4 border-0.3' />
+      <footer className='mx-3 px-5 py-5 mt-3'>
         <p>
           Made with ❤️ by
           <a href='https://github.com/khk4912' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:underline'>
