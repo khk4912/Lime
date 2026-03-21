@@ -82,9 +82,18 @@ function App () {
 
         {isLoading && <p className='mt-4 text-xs text-zinc-400'>옵션을 불러오는 중...</p>}
       </main>
-      <footer className='mx-3 px-5 py-5 mt-5'>
+      <footer className='mx-3 px-5 py-5 mt-10'>
         <hr className='border-zinc-700 mb-4 border-0.3' />
-        <p>Made with ❤️ by <a href='https://github.com/khk4912' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:underline'>kosame</a></p>
+        <p>
+          Made with ❤️ by
+          <a href='https://github.com/khk4912' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:underline'>
+            <span> kosame</span>
+          </a>
+          <span> |  </span>
+          <a href='https://github.com/khk4912/Lime' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:underline'>
+            <span>Lime GitHub</span>
+          </a>
+        </p>
         <p className='text-xs text-zinc-600 break-keep'>Lime은 '씨미'와 관련이 없는 개인 프로젝트입니다.</p>
       </footer>
 
