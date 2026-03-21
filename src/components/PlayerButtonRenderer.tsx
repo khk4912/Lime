@@ -34,7 +34,7 @@ function PlayerButtonPortalContainer ({ children }: { children: React.ReactNode 
 export function PlayerButtonRenderer () {
   const { options, isLoading } = useOptions()
 
-  if (isLoading || (!options.pip && !options.screenshot)) {
+  if (isLoading || (!options.rec && !options.pip && !options.screenshot)) {
     return null
   }
 

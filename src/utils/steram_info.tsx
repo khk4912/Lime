@@ -3,9 +3,9 @@ export interface StreamInfo {
   title: string
 }
 
-export function getStreamInfo (): StreamInfo | null {
+export function getStreamInfo (): StreamInfo {
   if (!(window.location.pathname.endsWith('/live'))) {
-    return null
+    return { streamerName: 'unknown', title: 'unknown' }
   }
 
   const streamerName = document.querySelector('a[class^="user_name"]')?.textContent ?? 'streamer'

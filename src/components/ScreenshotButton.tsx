@@ -2,6 +2,7 @@ import { getStreamInfo } from '@/utils/steram_info'
 import { CustomVJSButton } from './CustomVJSButton'
 import ScreenshotIcon from '@/assets/screenshot.svg?react'
 import { sanitizeFileName, ymdhms } from '@/utils/file'
+
 export function ScreenshotButton () {
   return (
     <CustomVJSButton
