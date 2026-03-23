@@ -49,9 +49,10 @@ function RecordOverlayContainer ({ children }: { children: React.ReactNode }) {
     position: 'before',
     style: {
       position: 'absolute',
-      zIndex: 9999,
+      zIndex: 2,
       top: '3%',
-      left: '3%'
+      left: '3%',
+      width: '60px'
     }
   })
 
