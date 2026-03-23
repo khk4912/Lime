@@ -3,7 +3,8 @@ import { storage } from '#imports'
 export interface LimeOptions {
   pip: boolean
   screenshot: boolean
-  rec: boolean
+  rec: boolean,
+  seek: boolean,
 }
 
 export const OPTIONS_STORAGE_KEY = 'local:options' as const
@@ -12,6 +13,7 @@ export const LIME_DEFAULT_OPTIONS: LimeOptions = {
   pip: true,
   screenshot: true,
   rec: true,
+  seek: true,
 }
 
 export function mergeOptions (options?: Partial<LimeOptions> | null): LimeOptions {

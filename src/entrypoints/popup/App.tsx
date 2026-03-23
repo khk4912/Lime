@@ -64,12 +64,14 @@ function App () {
 
   return (
     <>
-      <main className='flex-row h-80 w-full
-                     items-center px-8 text-zinc-50'
-      >
+      <header className='flex-row px-8'>
         <Header />
+      </header>
+      <main className='flex-row h-80 w-full
+                     items-center px-8 text-zinc-50 overflow-scroll'
+      >
         <div className='grid mt-5 border border-white/10
-                        px-5 py-4 rounded-2xl gap-6'
+                        px-5 py-4 rounded-2xl gap-6 overflow-scroll scrollbar-thumb-white/20 scrollbar-track-transparent scrollbar'
         >
           <Option
             optionKey='rec'
@@ -86,12 +88,18 @@ function App () {
             label='PIP (P)'
             description='브라우저 PIP 버튼을 추가합니다.'
           />
+          <Option
+            optionKey='seek'
+            label='탐색 (← / →)'
+            description='방향키를 이용하여 방송의 이전 또는 다음 부분으로 이동합니다.'
+          />
+
         </div>
 
         {isLoading && <p className='mt-4 text-xs text-zinc-400'>옵션을 불러오는 중...</p>}
 
       </main>
-      <footer className='mx-3 px-5 py-5 mt-3'>
+      <footer className='mx-3 px-5 pb-5 mt-3 text-zinc-400 text-xs'>
         <p>
           Made with ❤️ by
           <a href='https://github.com/khk4912' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:underline'>

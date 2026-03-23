@@ -1,5 +1,6 @@
-import { createRoot, type Root } from 'react-dom/client'
+import { inject } from '@/utils/inject'
 import { PlayerButtonRenderer } from '@/components/PlayerButtonRenderer'
+import { SeekerRenderer } from '@/components/SeekerRenderer'
 import { OptionProvider } from '@/providers/OptionProvider'
 
 export function RenderButtons () {
@@ -11,6 +12,7 @@ export function RenderButtons () {
   let root = inject(
     <OptionProvider>
       <PlayerButtonRenderer />
+      <SeekerRenderer />
     </OptionProvider>,
     div
   )
@@ -26,15 +28,9 @@ export function RenderButtons () {
     root = inject(
       <OptionProvider>
         <PlayerButtonRenderer />
+        <SeekerRenderer />
       </OptionProvider>,
       div
     )
   })
-}
-
-function inject (node: React.ReactNode, target: HTMLElement): Root {
-  const root = createRoot(target)
-  root.render(node)
-
-  return root
 }
