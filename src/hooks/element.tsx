@@ -1,8 +1,7 @@
 export function useElementTarget (selector: string) {
   const [target, setTarget] = useState<Element | undefined>(undefined)
-
   useEffect(() => {
-    if (target?.isConnected === true) {
+    if (target !== undefined) {
       return
     }
 

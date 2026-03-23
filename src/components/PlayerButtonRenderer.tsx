@@ -14,8 +14,8 @@ const PlayerPortalStyle: React.CSSProperties = {
 function PlayerButtonPortalContainer ({ children }: { children: React.ReactNode }) {
   const portalTarget = usePortal({
     id: 'lime-button-portal',
-    targetSelector: '.vjs-control.vjs-button.vjs-video-edit-open',
-    position: 'before',
+    targetSelector: '.vjs-unified-time.vjs-time-control.vjs-control',
+    position: 'after',
     style: PlayerPortalStyle
   })
 
@@ -26,16 +26,32 @@ function PlayerButtonPortalContainer ({ children }: { children: React.ReactNode 
 
 export function PlayerButtonRenderer () {
   const { options, isLoading } = useOptions()
+  const [targetFound, setTargetFound] = useState(false)
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      const target = document.querySelector('.vjs-control-bar')
+      if (target) {
+        setTargetFound(true)
+        window.clearInterval(interval)
+      }
+    }, 100)
+
+    return () => {
+      window.clearInterval(interval)
+    }
+  }, [])
 
   if (isLoading || (!options.rec && !options.pip && !options.screenshot)) {
     return null
   }
 
   return (
-    <PlayerButtonPortalContainer>
-      {options.rec && <RecordButton />}
-      {options.screenshot && <ScreenshotButton />}
-      {options.pip && <PIPButton />}
-    </PlayerButtonPortalContainer>
+    targetFound &&
+      <PlayerButtonPortalContainer>
+        {options.rec && <RecordButton />}
+        {options.screenshot && <ScreenshotButton />}
+        {options.pip && <PIPButton />}
+      </PlayerButtonPortalContainer>
   )
 }
