@@ -57,7 +57,7 @@ type PlaybackTarget =
   }
 
 const SEEK_SECONDS = 5
-const EDGE_GUARD = 0
+const EDGE_GUARD = 0.3
 
 const isObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null
