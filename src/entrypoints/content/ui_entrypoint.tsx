@@ -3,7 +3,7 @@ import { PlayerButtonRenderer } from '@/components/PlayerButtonRenderer'
 import { SeekerRenderer } from '@/components/SeekerRenderer'
 import { OptionProvider } from '@/providers/OptionProvider'
 
-export function RenderUIs () {
+export function RenderButtons () {
   let div = document.createElement('div')
   div.id = 'lime-buttons'
 

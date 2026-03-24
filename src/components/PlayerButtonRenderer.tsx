@@ -1,4 +1,3 @@
-// TODO: 파일 이름 말 좀 더 되게 바꿔보기 (Seek까지 들어가니까 좀 어색한데)
 import ReactDOM from 'react-dom'
 
 import { PIPButton } from './PIPButton'
