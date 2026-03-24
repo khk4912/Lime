@@ -5,6 +5,16 @@ export interface LimeOptions {
   screenshot: boolean
   rec: boolean,
   seek: boolean,
+  useAudioCompressor: boolean
+  compressorDetails: AudioCompressOptions
+}
+
+interface AudioCompressOptions {
+  threshold: number // (-100 ~ 0)
+  knee: number // (0 ~ 40)
+  ratio: number // (1 ~ 20)
+  attack: number // (0 ~ 1000)
+  release: number // (0 ~ 1000)
 }
 
 export const OPTIONS_STORAGE_KEY = 'local:options' as const
@@ -14,6 +24,14 @@ export const LIME_DEFAULT_OPTIONS: LimeOptions = {
   screenshot: true,
   rec: true,
   seek: true,
+  useAudioCompressor: false,
+  compressorDetails: {
+    threshold: -50,
+    knee: 30,
+    ratio: 4,
+    attack: 0,
+    release: 100
+  }
 }
 
 export function mergeOptions (options?: Partial<LimeOptions> | null): LimeOptions {

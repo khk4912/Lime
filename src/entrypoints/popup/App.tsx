@@ -1,6 +1,9 @@
 import './App.css'
 import '@/assets/tailwind.css'
 
+import { storage } from '#imports'
+
+import { AudioCompressorOptions } from './AudioCompressorOptions'
 import { useOptions } from '@/providers/useOptions'
 import { type LimeOptions } from '@/utils/options'
 
@@ -12,6 +15,9 @@ type ToggleProps = {
 
 function Option ({ optionKey, label, description }: ToggleProps) {
   const { options, updateOption } = useOptions()
+
+  if (optionKey === 'compressorDetails') { return null }
+
   const isChecked = options[optionKey]
 
   return (
@@ -56,16 +62,17 @@ function Header () {
     </div>
   )
 }
+
 function App () {
-  const { isLoading } = useOptions()
+  const { isLoading, options } = useOptions()
 
   return (
     <>
       <header className='flex-row px-8'>
         <Header />
       </header>
-      <main className='flex-row items-center w-full px-8 overflow-scroll h-80 text-zinc-50'>
-        <div className='grid gap-6 px-5 py-4 mt-5 overflow-scroll border border-white/10 rounded-2xl scrollbar-thumb-white/20 scrollbar-track-transparent scrollbar'>
+      <main className='flex-row items-center w-full px-8 overflow-scroll text-zinc-50'>
+        <div className='grid gap-6 px-5 py-4 mt-3 overflow-scroll border border-white/10 rounded-2xl scrollbar-thumb-white/20 scrollbar-track-transparent scrollbar'>
           <Option
             optionKey='rec'
             label='녹화 (R)'
@@ -86,13 +93,30 @@ function App () {
             label='탐색 (불안정, ← / →)'
             description='방송의 이전 또는 다음 부분으로 5초씩 이동합니다.'
           />
-
+          <Option
+            optionKey='useAudioCompressor'
+            label='오디오 컴프레서 사용'
+            description='오디오 컴프레서 버튼을 추가합니다.'
+          />
+          {options.useAudioCompressor && <AudioCompressorOptions />}
         </div>
 
         {isLoading && <p className='mt-4 text-xs text-zinc-400'>옵션을 불러오는 중...</p>}
 
       </main>
       <footer className='px-5 pb-5 mx-3 mt-3 text-xs text-zinc-400'>
+        <div className='mx-auto mb-3 gap-3 flex items-center justify-center'>
+          <button
+            className='rounded-2xl border border-white/10 bg-white/5
+                   py-2 px-4 hover:cursor-pointer hover:bg-white/10 transition-colors'
+            onClick={() => {
+              void storage.clear('local')
+            }}
+          >
+            설정 초기화
+          </button>
+
+        </div>
         <p>
           Made with ❤️ by
           <a href='https://github.com/khk4912' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:underline'>
