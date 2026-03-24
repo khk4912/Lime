@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom'
 
 import { PIPButton } from './PIPButton'
+import { AudioCompressorRenderer } from './AudioCompressorButton'
 import { ScreenshotButton } from './ScreenshotButton'
 import { RecordButton } from './RecordButton'
 
@@ -54,6 +55,7 @@ export function PlayerButtonRenderer () {
         {options.rec && <RecordButton />}
         {options.screenshot && <ScreenshotButton />}
         {options.pip && <PIPButton />}
+        {options.useAudioCompressor && <AudioCompressorRenderer />}
       </PlayerButtonPortalContainer>
   )
 }

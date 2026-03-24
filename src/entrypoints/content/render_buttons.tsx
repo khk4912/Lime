@@ -1,4 +1,6 @@
 import { inject } from '@/utils/inject'
+
+import { AudioCompressorRenderer } from '@/components/AudioCompressorButton'
 import { PlayerButtonRenderer } from '@/components/PlayerButtonRenderer'
 import { SeekerRenderer } from '@/components/SeekerRenderer'
 import { OptionProvider } from '@/providers/OptionProvider'
@@ -13,6 +15,7 @@ export function RenderUIs () {
     <OptionProvider>
       <PlayerButtonRenderer />
       <SeekerRenderer />
+
     </OptionProvider>,
     div
   )
@@ -33,6 +36,7 @@ export function RenderUIs () {
       <OptionProvider>
         <PlayerButtonRenderer />
         <SeekerRenderer />
+        <AudioCompressorRenderer />
       </OptionProvider>,
       div
     )
