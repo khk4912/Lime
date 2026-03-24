@@ -39,10 +39,7 @@ export function PlayerButtonRenderer () {
       }
     }, 100)
 
-    console.log('PlayerButtonRenderer mounted, searching for target element...')
-
     return () => {
-      console.log('PlayerButtonRenderer unmounted, clearing interval...')
       window.clearInterval(interval)
     }
   }, [])
