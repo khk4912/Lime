@@ -84,7 +84,7 @@ async function ensureGraph () {
     try {
       await audioContext.resume()
     } catch {
-      // 버튼 클릭이 아닌 시점에는 resume이 실패할 수 있으므로 무시합니다.
+      // resume 실패 무시
     }
   }
 }

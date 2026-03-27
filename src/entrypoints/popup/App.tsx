@@ -71,8 +71,8 @@ function App () {
       <header className='flex-row px-8'>
         <Header />
       </header>
-      <main className='flex-row items-center w-full px-8 overflow-scroll text-zinc-50'>
-        <div className='grid gap-6 px-5 py-4 mt-3 overflow-scroll border border-white/10 rounded-2xl scrollbar-thumb-white/20 scrollbar-track-transparent scrollbar'>
+      <main className='flex-row items-center w-full px-8 text-zinc-50'>
+        <div className='grid gap-6 px-5 py-4 mt-3 border border-white/10 rounded-2xl'>
           <Option
             optionKey='rec'
             label='녹화 (R)'
