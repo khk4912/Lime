@@ -24,7 +24,7 @@ export const LIME_DEFAULT_OPTIONS: LimeOptions = {
   screenshot: true,
   rec: true,
   seek: true,
-  useAudioCompressor: false,
+  useAudioCompressor: true,
   compressorDetails: {
     threshold: -50,
     knee: 30,
